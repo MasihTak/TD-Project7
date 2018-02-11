@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
       // re-add lives
       const ol = document.querySelector('ol');
 
-      while (ol.children.length <= 5) {
+      while (ol.children.length < 5) {
         const li = document.createElement('li');
         const img = document.createElement('img');
         li.className = 'tries';
