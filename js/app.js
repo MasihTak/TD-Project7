@@ -79,7 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function checkLetter(letterGuessed) {
     const allLeters = document.querySelectorAll('.letter');
-    letterFound = false;
+    let letterFound = false;
     for (let i = 0; i < allLeters.length; i++) {
       const letter = allLeters[i];
       if (letter.textContent === letterGuessed.textContent) {
@@ -111,10 +111,10 @@ document.addEventListener('DOMContentLoaded', () => {
   keyboard.addEventListener('click', (e) => {
     if (e.target.nodeName === 'BUTTON') {
       const activeKey = e.target;
-      let letterFound = checkLetter(activeKey);
+      let letterGuessed = checkLetter(activeKey);
       activeKey.className = 'chosen';
       activeKey.setAttribute('disabled', "");
-      if (letterFound === null) {
+      if (letterGuessed === null) {
         missed++;
         const lives = document.querySelectorAll('.tries')[0];
         const ol = lives.parentNode;
