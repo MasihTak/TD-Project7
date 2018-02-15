@@ -1,3 +1,5 @@
+/* jshint esversion: 6 */
+
 document.addEventListener('DOMContentLoaded', () => {
 
   // Global variables
@@ -22,7 +24,6 @@ document.addEventListener('DOMContentLoaded', () => {
     //restart the game when click on Play Again
     if(e.target.textContent === 'Play Again') {
       missed = 0;
-      const letter = document.querySelectorAll('.letter')
       const ul = phrase.firstElementChild;
       const chosenKey = document.querySelectorAll('.chosen');
       while (ul.hasChildNodes()) {
@@ -36,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
       for (let i = 0; i < chosenKey.length; i++) {
         chosenKey[i].classList.remove('chosen');
         chosenKey[i].removeAttribute('disabled');
-      };
+      }
 
       // re-add lives
       const ol = document.querySelector('ol');
@@ -48,16 +49,16 @@ document.addEventListener('DOMContentLoaded', () => {
         ol.appendChild(li);
         li.appendChild(img);
         img.src = "images/liveHeart.png";
-      };
-    };
+      }
+    }
   });
 
   // get random phrase
   function getRandomPhraseAsArray(arr) {
-    let randomPhrase = Math.floor(Math.random() * arr.length)
+    let randomPhrase = Math.floor(Math.random() * arr.length);
     let splitPhrase = arr[randomPhrase].split('');
     return splitPhrase;
-  };
+  }
 
   function addPhraseToDisplay(arr) {
     // loop  through an array of characters
@@ -70,40 +71,40 @@ document.addEventListener('DOMContentLoaded', () => {
         li.className = 'space';
       } else {
         li.className = 'letter';
-      };
-    };
-  };
+      }
+    }
+  }
 
   addPhraseToDisplay(phraseArray);
-  const allLeters = document.querySelectorAll('.letter');
 
   function checkLetter(letterGuessed) {
+    const allLeters = document.querySelectorAll('.letter');
     letterFound = false;
     for (let i = 0; i < allLeters.length; i++) {
       const letter = allLeters[i];
       if (letter.textContent === letterGuessed.textContent) {
         letter.classList.add('show');
         letterFound = true;
-      };
-    };
+      }
+    }
     return letterFound ? letterGuessed.textContent : null;
-  };
+  }
 
 
   function checkWin() {
     const correctLetters = document.querySelectorAll('.show');
+    const allLeters = document.querySelectorAll('.letter');
     if (correctLetters.length === allLeters.length) {
       overlay.style.display = 'flex';
       assignProperty(title, 'textContent', 'Wow! You Won!');
-      assignProperty(startGame, 'textContent', 'Play Again');
       overlay.style.backgroundColor = '#17c671';
     } else if (missed >= 5) {
       overlay.style.display = 'flex';
       assignProperty(title, 'textContent', 'Oops! Game Over!');
-      assignProperty(startGame, 'textContent', 'Play Again');
       overlay.style.backgroundColor = '#c4183c';
     }
-  };
+    assignProperty(startGame, 'textContent', 'Play Again');
+  }
 
 
   //Add click event listener to the keyboard
@@ -120,9 +121,9 @@ document.addEventListener('DOMContentLoaded', () => {
         while(missed <= 5) {
           ol.removeChild(lives);
           break;
-        };
-      };
+        }
+      }
       checkWin();
-    };
+    }
   });
 });
